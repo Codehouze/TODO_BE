@@ -1,0 +1,26 @@
+{ 
+    "compilerOptions": {
+       "allowSyntheticDefaultImports": true,
+       "esModuleInterop": true,
+       "resolveJsonModule": true,
+       "experimentalDecorators": true,
+       "emitDecoratorMetadata":true,
+       "noImplicitAny": false,
+       "strict": true,
+       "sourceMap": true,
+       "target": "es6",
+       "module": "commonjs",
+       "outDir": "dist",
+       "rootDir": "src",
+       "baseUrl": ".",
+       "paths": {
+         "*": ["node_modules/*", "src/types/*"]
+      }
+    },
+    "include": [
+        "src/**/*", "src/database/config/index.ts",
+    ],
+    "exclude": ["node_modules",  "test/**/*.spec.ts"]
+}
+
+
