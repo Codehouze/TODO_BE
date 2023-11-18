@@ -19,7 +19,7 @@
     "@types/chai": "latest",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",
-    "@types/mocha": "^10.0.1",
+    "@types/mocha": "^10.0.4",
     "@types/pg": "^8.6.6",
     "eslint": "^8.14.0",
     "esm": "^3.2.25",
