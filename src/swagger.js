@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const { APP_URL, PORT } = process.env;
+const { PORT } = process.env;
 
 const options = {
 swaggerDefinition:{
