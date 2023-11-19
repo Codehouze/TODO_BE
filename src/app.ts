@@ -2,10 +2,16 @@ import express, { Request, Response, NextFunction } from "express";
 import userRoutes from "./routes/userRoutes";
 import todoRoutes from "./routes/todoRoutes";
 import connectDb from "../src/database/config/index";
+import specs from './swagger';
+const swaggerUi = require('swagger-ui-express');
+const cors = require('cors');
+
+
 
 const app = express()
-//connect to db
 
+
+//connect to db
 const initializeDb = async () => {
   await connectDb();
   console.log("Connected to database");
@@ -13,12 +19,20 @@ const initializeDb = async () => {
 
 initializeDb();
 // Middleware
+
+// Enable CORS for all routes
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Add swagger route 
+app.use('/api-docs', swaggerUi.serve,swaggerUi.setup(specs));
 
 // Routes
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/todo", todoRoutes);
+
+
 
 // Health check
 app.get("/", (req, res) => {

@@ -7,6 +7,7 @@
        "emitDecoratorMetadata":true,
        "noImplicitAny": false,
        "strict": true,
+      
        "sourceMap": true,
        "target": "es6",
        "module": "commonjs",
@@ -20,9 +21,12 @@
     "include": [
         "__tests__/**/*.spec.ts",
         "src/**/*", 
+        "src/*.js",
         "src/database/config/index.ts",
+        "swagger.js"
     ],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
+
 }
 
 

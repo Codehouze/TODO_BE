@@ -3,29 +3,7 @@
  * tags:
  *   name: User
  *   description: API for managing user Authentication
- * /user/{id}:
- *   get:
- *     summary: Get a user by ID
- *     tags: [User]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: The ID of the user
- *     responses:
- *       200:
- *         description: Successful response. Returns the requested user.
- *         content:
- *           application/json:
- *             example:
- *               id: 1
- *               email: example_user@example.com
- *       404:
- *         description: User not found.
- *     security:
- *       - bearerAuth: []
+ * /user/signup:
  *   post:
  *     summary: Create a new user
  *     tags: [User]
@@ -42,12 +20,7 @@
  *         schema:
  *           type: string
  *         description: The password of the new user
- *       - in: header
- *         name: Authorization
- *         required: true
- *         schema:
- *           type: string
- *         description: Bearer token for user authentication
+ *     
  *     responses:
  *       201:
  *         description: User created successfully. Returns the created user.
@@ -59,8 +32,7 @@
  *               password: pa55234
  *       400:
  *         description: Bad request. email and password parameters are required.
- *     security:
- *       - bearerAuth: []
+ *     
  * /user/login:
  *   post:
  *     summary: Login a user
@@ -88,8 +60,30 @@
  *               email: updated_user@example.com
  *       404:
  *         description: User email or password is incorrect.
- *     security:
- *       - bearerAuth: []
+ *     
+ * /user/{id}:
+ *   get:
+ *     summary: Get a user by ID
+ *     tags: [User]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the user
+ *     responses:
+ *       200:
+ *         description: Successful response. Returns the requested user.
+ *         content:
+ *           application/json:
+ *             example:
+ *               id: 1
+ *               email: example_user@example.com
+ *       404:
+ *         description: User not found.
+ *   
+ * 
  * 
  */
 
