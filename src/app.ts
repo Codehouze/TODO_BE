@@ -6,12 +6,9 @@ import specs from './swagger';
 const swaggerUi = require('swagger-ui-express');
 const cors = require('cors');
 
-
-
 const app = express()
 
-
-//connect to db
+//connect to the database
 const initializeDb = async () => {
   await connectDb();
   console.log("Connected to database");
@@ -22,19 +19,21 @@ initializeDb();
 
 // Enable CORS for all routes
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
+
+// Parse incoming requests with JSON payload
 app.use(express.json());
 
-// Add swagger route 
+// Parse incoming requests with URL-encoded payload
+app.use(express.urlencoded({ extended: true }));
+
+// Add swagger documentation route 
 app.use('/api-docs', swaggerUi.serve,swaggerUi.setup(specs));
 
 // Routes
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/todo", todoRoutes);
 
-
-
-// Health check
+// Health check endpoint
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
