@@ -25,6 +25,7 @@
 ### Project Setup:
 ```bash git clone git@github.com:Codehouze/TODO_BE.git
 #### - cd TODO_BE
+```
 #### - yarn install
 #### - create .env file and update it with the configurations from the mail..
 #### - yarn run dev
