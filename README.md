@@ -25,11 +25,13 @@
 ### Project Setup:
 ```bash
 git clone git@github.com:Codehouze/TODO_BE.git
-#### - cd TODO_BE
+ - cd TODO_BE
+ - yarn install
+ - yarn run dev
 ```
-#### - yarn install
+
 #### - create .env file and update it with the configurations from the mail..
-#### - yarn run dev
+
 
 # Swagger documentation:
 - This can be located at http://localhost:5000/api-docs/
