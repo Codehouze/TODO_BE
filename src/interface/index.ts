@@ -3,9 +3,6 @@ interface ITodo {
     // completed: boolean;
   }
   
-   interface ICreateUser {
-    email: string;
-    password: string;
-  }
 
-export {ITodo,ICreateUser};
+
+export {ITodo};

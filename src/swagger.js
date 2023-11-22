@@ -24,18 +24,7 @@ const options = {
         description: "Development server", 
       },
     ],
-    // Define security settings for the API
-    security: [{ BearerAuth: [] }], 
-    components: {
-      securitySchemes: {
-        // Specify the authentication type
-        BearerAuth: {
-          type: 'http', 
-          scheme: 'bearer', 
-          bearerFormat: 'JWT', 
-        },
-      },
-    },
+ 
   },
   // Specify the paths to your API routes
   apis: ["src/routes/*.ts"], 

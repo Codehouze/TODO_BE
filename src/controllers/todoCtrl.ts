@@ -5,14 +5,12 @@ class TodoController {
   // Handle creating a new todo
   static async createTodo(req: any, res: Response, next: NextFunction) {
     try {
-      // Extract title from the request body and user ID from the request user
-      const {
-        body: { title },
-        user: id,
-      } = req;
-
+      // Extract title from the request body 
+      console.log(req)
+      const  { title } = req.body;
+      console.log(req.body)
       // Call the createTodo method in the TodoService to create a new todo
-      const { savedTodo, message } = await TodoService.createTodo({ title }, id);
+      const { savedTodo, message } = await TodoService.createTodo({ title });
       res.json({ savedTodo, message });
     } catch (err) {
       // Pass the error to the error-handling middleware
@@ -42,12 +40,10 @@ class TodoController {
   static async getAllTodo(req: any, res: Response, next: NextFunction) {
     try {
       // Extract user ID from the request user
-      const {
-        user: { id },
-      } = req;
+     
 
       // Call the getAllTodo method in the TodoService to retrieve all todos
-      const { todo, message } = await TodoService.getAllTodo(id);
+      const { todo, message } = await TodoService.getAllTodo();
 
       res.json({ todo, message });
     } catch (err) {

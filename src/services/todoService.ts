@@ -1,18 +1,18 @@
 import Todo from "../database/entity/Todo"; // todo model
 import { ITodo } from "../interface/index"; // interface for todo data
 import { DB } from "../database/config/index"; // Db connection object
-import User from "../database/entity/User"; // User model
+
 
 class TodoService {
   // Create a new todo for a user
   static async createTodo(
     { title }: ITodo,
-    id: User
+  
   ): Promise<{ savedTodo: ITodo; message: string }> {
     const todoRepo = DB.getRepository(Todo);
     const todo = new Todo();
     todo.title = title;
-    todo.user = id;
+
     const savedTodo = await todoRepo.save(todo);
     return { savedTodo, message: "Todo created successfully!" };
   }
@@ -28,18 +28,25 @@ class TodoService {
     }
     return { message: "Todo was not found" };
   }
+  
   // Mark a todo as completed
   static async completeTodo(id: number, completed: boolean): Promise<any> {
+    const getTodo = await this.getTodo(id)
+    if(getTodo?.completed===false){
     const completeTodo = await Todo.update(id, { completed: true });
-    if (completeTodo) {
-      return { completeTodo, message: "Todo completed" };
+    return { completeTodo, message: "Todo completed" };
     }
-  }
- // Get all todos for a user
-  static async getAllTodo(id: any): Promise<any> {
+    const unCompletedTodo = await Todo.update(id, { completed: false });
+   
+      return { unCompletedTodo, message: "Todo has not been uncompleted" };
+    }
+
+  
+ // Get all todos 
+  static async getAllTodo(): Promise<any> {
     const todoRepository = DB.getRepository(Todo);
     const todo = await todoRepository.find({
-      where: { user: id, isDeleted: false },
+      where: {  isDeleted: false },
     });
 
     if (todo.length == 0) {

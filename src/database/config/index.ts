@@ -8,7 +8,7 @@ import { DataSource, DataSourceOptions } from "typeorm";
 const { DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME } = process.env;
 
 // Import the database entities
-import User from "../entity/User";
+
 import Todo from "../entity/Todo";
 
 // Define the database configuration options
@@ -30,7 +30,7 @@ const DB_CONFIG: DataSourceOptions = {
     },
   },
 // List of entity classes to be used by TypeORM
-  entities: [User, Todo],  
+  entities: [Todo],  
   // Specify migration files location
   migrations: [__dirname + "./migrations/*{.js,.ts}"],  
 };

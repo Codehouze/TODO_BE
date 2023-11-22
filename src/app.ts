@@ -1,5 +1,4 @@
 import express, { Request, Response, NextFunction } from "express";
-import userRoutes from "./routes/userRoutes";
 import todoRoutes from "./routes/todoRoutes";
 import connectDb from "../src/database/config/index";
 import specs from './swagger';
@@ -30,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve,swaggerUi.setup(specs));
 
 // Routes
-app.use("/api/v1/user", userRoutes);
+
 app.use("/api/v1/todo", todoRoutes);
 
 // Health check endpoint

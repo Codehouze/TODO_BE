@@ -11,29 +11,25 @@
  *       responses:
  *         200:
  *           description: Successful response. Returns a list of todos.
- *       security:
- *         - bearerAuth: []
+ *     
  *     post:
- *       summary: Create a todo
+ *       summary: Create a new todo item.
  *       tags: [Todo]
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 title:
+ *                   type: string
+ *               required:
+ *                 - title
  *       responses:
  *         201:
- *           description: Todo created successfully. Returns the created todo.
- *       security:
- *         - bearerAuth: []
- *       parameters:
- *         - in: query
- *           name: title
- *           required: true
- *           schema:
- *             type: string
- *           description: The title of the todo
- *         - in: header
- *           name: Authorization
- *           required: true
- *           schema:
- *             type: string
- *           description: Bearer token for user authentication
+ *           description: Todo created successfully. Returns the created todo.  
+ *        
  *   /todo/{id}:
  *     get:
  *       summary: Get a todo by ID
@@ -50,8 +46,7 @@
  *           description: Successful response. Returns the requested todo.
  *         404:
  *           description: Todo not found.
- *       security:
- *         - bearerAuth: []
+ *      
  *     patch:
  *       summary: Update a todo by ID
  *       tags: [Todo]
@@ -62,13 +57,21 @@
  *           schema:
  *             type: string
  *           description: The ID of the todo
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 title:
+ *                   type: string
  *       responses:
  *         200:
  *           description: Successful response. Returns the updated todo.
  *         404:
  *           description: Todo not found.
- *       security:
- *         - bearerAuth: []
+ *     
  *     delete:
  *       summary: Delete a todo by ID
  *       tags: [Todo]
@@ -84,8 +87,7 @@
  *           description: Successful response. Returns a confirmation message.
  *         404:
  *           description: Todo not found.
- *       security:
- *         - bearerAuth: []
+ *     
  *   /todo/complete/{id}:
  *     patch:
  *       summary: Complete a todo by ID
@@ -108,42 +110,42 @@
  *           description: Successful response. Returns the completed todo.
  *         404:
  *           description: Todo not found.
- *       security:
- *         - bearerAuth: []
  */
 
+
+
 import express from "express";
-import validator from "../middlewares/validate";
+import validator from "../middleware/validate";
 import TodoController from "../controllers/todoCtrl";
-import verifyJwToken from "../middlewares/authenticate";
+
 
 const router = express.Router();
 
 // Define the routes
+//Add a to-do
 router.post(
   "/",
-  verifyJwToken,
-  validator.todoValidator,
+  // validator.todoValidator,
   TodoController.createTodo
-); //Add a to-do
+); 
 
-router.get("/", verifyJwToken, TodoController.getAllTodo); // List all todos
+router.get("/",  TodoController.getAllTodo); // List all todos
 
-router.get("/:id", verifyJwToken, TodoController.getOneTodo); // Return a todo
+router.get("/:id",  TodoController.getOneTodo); // Return a todo
 
 router.patch(
   "/:id",
-  verifyJwToken,
   validator.todoValidator,
   TodoController.updateTodo
-); // Change a to-do
+); 
 
+// Change a to-do
 router.patch(
   "/complete/:id",
-  verifyJwToken,
   validator.todoValidator,
   TodoController.completeTodo
 );
-router.delete("/:id", verifyJwToken, TodoController.deleteTodo);
+router.delete("/:id", 
+TodoController.deleteTodo);
 
 export default router;
