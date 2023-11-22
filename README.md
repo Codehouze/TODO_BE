@@ -11,7 +11,7 @@
 #### - Mocha
 #### - PostgreSQl
 #### - Express
-#### - Sequelize ORM
+#### - TypeORM
 
 
 ## Features:
