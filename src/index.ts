@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 // Set the port for the server
-const PORT = process.env.PORT || 9000; 
+const PORT = process.env.APP_PORT || 9000; 
 try {
   // Attempt to start the server and log a message upon successful connection
   app.listen(PORT, () => {

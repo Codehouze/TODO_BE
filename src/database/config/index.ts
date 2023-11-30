@@ -7,6 +7,8 @@ import { DataSource, DataSourceOptions } from "typeorm";
 // Extract database configuration variables from environment variables
 const { DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME } = process.env;
 
+console.log( DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME)
+
 // Import the database entities
 
 import Todo from "../entity/Todo";
@@ -15,7 +17,7 @@ import Todo from "../entity/Todo";
 const DB_CONFIG: DataSourceOptions = {
   type: "postgres",  // Database type (PostgreSQL in this case)
   host: DB_HOST,      // Database host
-  port: undefined,    // Database port (undefined for default)
+  port: 5432,    // Database port (undefined for default)
   username: DB_USERNAME,  // Database username
   password: DB_PASSWORD,  // Database password
   database: DB_NAME,      // Database name

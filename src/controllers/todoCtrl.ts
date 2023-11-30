@@ -6,9 +6,7 @@ class TodoController {
   static async createTodo(req: any, res: Response, next: NextFunction) {
     try {
       // Extract title from the request body 
-      console.log(req)
       const  { title } = req.body;
-      console.log(req.body)
       // Call the createTodo method in the TodoService to create a new todo
       const { savedTodo, message } = await TodoService.createTodo({ title });
       res.json({ savedTodo, message });
@@ -28,8 +26,8 @@ class TodoController {
       } = req;
 
       // Call the updateTodo method in the TodoService to update the todo
-      const { updateTodo, message } = await TodoService.updateTodo(id, { title });
-      return res.json({ updateTodo, message });
+      const { updatedTodo, message } = await TodoService.updateTodo(id, { title });
+      return res.json({ updatedTodo, message });
     } catch (err) {
       // Pass the error to the error-handling middleware
       next(err);

@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-import User from "./database/entity/User";
 import Todo from "./database/entity/Todo";
 
 const { DB_HOST, DB_USERNAME, DB_PASSWORD } = process.env;
@@ -13,5 +12,5 @@ export default {
   password: DB_PASSWORD,
   database: DB_USERNAME,
   synchronize: true,
-  entities: [User, Todo],
+  entities: [Todo],
 };

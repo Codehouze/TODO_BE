@@ -22,6 +22,7 @@ class TodoService {
 
     if (todo) {
       todo.title = title;
+   
       await Todo.update(id, todo);
       const updatedTodo = await this.getTodo(id);
       return { updatedTodo, message: "Todo was updated successfully" };

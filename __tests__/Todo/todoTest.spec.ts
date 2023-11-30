@@ -2,39 +2,16 @@ import sinon from "sinon";
 import TodoService from "../../src/services/todoService";
 import { DB } from "../../src/database/config/index";
 import { expect } from "chai";
-import User from "../../src/database/entity/User";
 import Todo from "../../src/database/entity/Todo";
-import jwt from "jsonwebtoken";
 import { faker } from "@faker-js/faker";
 
-let authToken;
-let userId;
 describe("TODO Application Unit test", () => {
   // Restore Sinon stubs before each test
   beforeEach(() => {
     sinon.restore();
   });
 
-  // Section: User Token
-  describe("User Token", function () {
-    it("should return a valid authentication token", () => {
-        // Test creating a valid authentication token
-      const user = new User();
-      user.id = faker.datatype.number();
-      user.email = faker.internet.email();
-      user.password = faker.internet.password();
-      user.createdAt = faker.date.past();
-      user.updatedAt = faker.date.past();
 
-      userId = user.id;
-      const email = user.email;
-      authToken = jwt.sign({ userId, email }, "dev_Prodigy");
-
-      // Assertions for the generated token
-      expect(authToken).to.be.a("string");
-      expect(authToken).to.be.a("string");
-    });
-  });
   // Section: TodoService
   describe("TodoService", () => {
     // Sub-section: Create A Todo
@@ -48,21 +25,20 @@ describe("TODO Application Unit test", () => {
             id: 1,
             title: "Test Todo",
             completed: "false",
-            user: userId,
+ 
           }),
         };
         sinon.stub(DB, "getRepository").returns(todoRepo);
 
         const result = await TodoService.createTodo(
           { title: "Test Todo" },
-          userId
         );
         // Assertions for the created todo
         expect(result.savedTodo).to.deep.equal({
           id: 1,
           title: "Test Todo",
           completed: "false",
-          user: userId,
+  
         });
         expect(result.message).to.equal("Todo created successfully!");
       });
@@ -76,13 +52,13 @@ describe("TODO Application Unit test", () => {
           id: 1,
           title: "Test Todo",
           completed: false,
-          user: userId,
+      
         };
         const updatedTodo = {
           id: 1,
           title: "Updated Todo",
           completed: false,
-          user: userId,
+        
         };
 
         const getTodoStub = sinon.stub(TodoService, "getTodo").resolves(todo);
@@ -128,7 +104,7 @@ describe("TODO Application Unit test", () => {
         };
         sinon.stub(DB, "getRepository").returns(todoRepo);
 
-        const result = await TodoService.getAllTodo(1);
+        const result = await TodoService.getAllTodo();
       
         // Assertions for the retrieved todos
         expect(result.todo).to.deep.equal([
@@ -146,7 +122,7 @@ describe("TODO Application Unit test", () => {
         };
         sinon.stub(DB, "getRepository").returns(todoRepo);
 
-        const result = await TodoService.getAllTodo(2);
+        const result = await TodoService.getAllTodo();
         // Assertions for no retrieved todos
         expect(result.data).to.deep.equal([]);
         expect(result.message).to.equal("Todo Not Found");
@@ -161,7 +137,7 @@ describe("TODO Application Unit test", () => {
         id: 1,
         title: "Test Todo",
         completed: false,
-        user: userId,
+  
       };
 
       sinon.stub(TodoService, "getOneTodo").resolves(todo);
@@ -173,7 +149,7 @@ describe("TODO Application Unit test", () => {
         id: 1,
         title: "Test Todo",
         completed: false,
-        user: userId,
+
       });
     });
   });
@@ -185,9 +161,17 @@ describe("TODO Application Unit test", () => {
         id: 1,
         title: "Test Todo",
         completed: false,
-        user: userId,
+   
       };
-      const updateStub = sinon.stub(Todo, "update").resolves(todo);
+      const completeTodo = {
+        id: 1,
+        title: "Test Todo",
+        completed: true,
+   
+      };
+      const getTodoStub = sinon.stub(TodoService, "getTodo").resolves(todo);
+
+      const updateStub = sinon.stub(Todo, "update").resolves(completeTodo);
 
       const result = await TodoService.completeTodo(1, true);
       // assert that update was called with the correct arguments
@@ -205,7 +189,7 @@ describe("TODO Application Unit test", () => {
       id: 1,
       title: "Test Todo",
       completed: false,
-      user: userId,
+   
       isDeleted: false
     };
     const findOneStub = sinon.stub(todoRepository, "findOne").resolves(todo);
