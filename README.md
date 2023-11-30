@@ -17,8 +17,7 @@
 #### I opted to use Node.js because of it's non-blocking, event-driven architecture suitable for handling concurrent requests.TypeScript was used for the backend as well, ensuring a consistent and type-safe codebase throughout the application.TypeORM was chosen as the ORM to simplify database interactions and provide a seamless TypeScript integration.
 
 ## Database:
-#### The decision to use PostgreSQL (PG) as the database was based on its reputation for reliability, ACID compliance, and support for complex queries. 
-#### PostgreSQL aligns well with the project requirements, offering a robust solution for data storage and retrieval.
+#### The decision to use PostgreSQL (PG) as the database was based on its reputation for reliability, ACID compliance, and support for complex queries. PostgreSQL aligns well with the project requirements, offering a robust solution for data storage and retrieval.
 
 
 ## Features:
